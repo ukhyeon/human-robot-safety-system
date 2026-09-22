@@ -30,10 +30,10 @@ Indy7 state, dynamics, and effective mass ──────┘              │
 
 ## Repositories
 
-| Repository | Responsibility |
-| --- | --- |
-| [`hrc_ws`](https://github.com/ukhyeon/hrc_ws) | Human sensing, 3D pose estimation, human dynamics, visualization, and shared ROS 2 interfaces |
-| [`indy_ws`](https://github.com/ukhyeon/indy_ws) | Indy7 communication, robot dynamics, collision-risk assessment, and robot speed control |
+| Repository | Responsibility | Access |
+| --- | --- | --- |
+| [`hrc_ws`](https://github.com/ukhyeon/hrc_ws) | Human sensing, 3D pose estimation, human dynamics, visualization, and shared ROS 2 interfaces | Private while restricted third-party code is being replaced |
+| [`indy_ws`](https://github.com/ukhyeon/indy_ws) | Indy7 communication, robot dynamics, collision-risk assessment, and robot speed control | Public |
 
 `indy_ws` depends on the `hrc_interfaces` package provided by `hrc_ws`.
 
@@ -54,6 +54,12 @@ The repository includes a
 [`vcstool`](https://github.com/dirk-thomas/vcstool). It downloads both component
 repositories into one local source directory without duplicating their Git
 history.
+
+> [!NOTE]
+> The complete manifest currently requires collaborator access to `hrc_ws`.
+> Public users can browse and clone `indy_ws`; the human-side repository will be
+> opened after its restricted third-party code is replaced or separately
+> cleared for redistribution.
 
 ```bash
 sudo apt install python3-vcstool
@@ -126,4 +132,3 @@ separate licenses and are not distributed through this hub repository.
 The system is under active development. Some component configuration paths and
 hardware parameters still reflect the original development environment; review
 the component README files before attempting reproduction on another machine.
-
