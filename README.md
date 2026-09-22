@@ -32,7 +32,7 @@ Indy7 state, dynamics, and effective mass ──────┘              │
 
 | Repository | Responsibility | Access |
 | --- | --- | --- |
-| [`hrc_ws`](https://github.com/ukhyeon/hrc_ws) | Human sensing, 3D pose estimation, human dynamics, visualization, and shared ROS 2 interfaces | Private while restricted third-party code is being replaced |
+| [`hrc_ws-public`](https://github.com/ukhyeon/hrc_ws-public) | Human sensing, 3D pose estimation, human dynamics, visualization, and shared ROS 2 interfaces | Public, clean-history snapshot |
 | [`indy_ws`](https://github.com/ukhyeon/indy_ws) | Indy7 communication, robot dynamics, collision-risk assessment, and robot speed control | Public |
 
 `indy_ws` depends on the `hrc_interfaces` package provided by `hrc_ws`.
@@ -56,10 +56,8 @@ repositories into one local source directory without duplicating their Git
 history.
 
 > [!NOTE]
-> The complete manifest currently requires collaborator access to `hrc_ws`.
-> Public users can browse and clone `indy_ws`; the human-side repository will be
-> opened after its restricted third-party code is replaced or separately
-> cleared for redistribution.
+> The manifest checks out `hrc_ws-public` into a local directory named `hrc_ws`
+> so that existing workspace paths and build instructions remain unchanged.
 
 ```bash
 sudo apt install python3-vcstool
