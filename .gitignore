@@ -1,0 +1,13 @@
+# Local multi-repository checkout
+src/
+
+# ROS 2 build artifacts
+build/
+install/
+log/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+

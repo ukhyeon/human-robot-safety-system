@@ -1,0 +1,10 @@
+repositories:
+  hrc_ws:
+    type: git
+    url: https://github.com/ukhyeon/hrc_ws.git
+    version: main
+  indy_ws:
+    type: git
+    url: https://github.com/ukhyeon/indy_ws.git
+    version: main
+
