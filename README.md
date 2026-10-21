@@ -24,6 +24,33 @@ interface.
 > Estimation for Online Collision-Force Assessment and Speed Scaling of
 > Collaborative Robots." [PDF](docs/paper/ijcas_manuscript.pdf)
 
+## Directional human effective mass
+
+The speed scale above depends on the human effective mass at the candidate
+contact point. Instead of a fixed body-region value, the system computes it
+from a personalized SMPL-based 19-segment model, so it changes with the
+collision direction and with active joint range-of-motion (ROM) constraints.
+
+<p align="center">
+  <img src="docs/images/effective_mass_ellipsoid_head.png" width="380" alt="Effective-mass ellipsoid at the head">
+</p>
+<p align="center">
+  X–Z view of the mass-scaled principal effective-mass ellipsoid at the head.
+  Longer semi-axes mean lower mobility. In this posture the principal effective
+  masses range from 6.17 to 16.51 kg, about 2.7 times within one segment.
+</p>
+
+| (a) Collision direction and knee ROM constraint | (b) Ellipsoid without ROM constraint | (c) Ellipsoid with ROM constraint |
+| :---: | :---: | :---: |
+| ![Thigh collision direction](docs/images/thigh_collision_direction.png) | ![Thigh ellipsoid without ROM constraint](docs/images/thigh_ellipsoid_without_rom.png) | ![Thigh ellipsoid with ROM constraint](docs/images/thigh_ellipsoid_with_rom.png) |
+
+At a thigh point under opposite directions **u** and **−u**, the knee DOF
+becomes active when the contact force would drive the joint beyond its
+admissible range. With the same posture, point, direction, and foot support,
+activating the knee ROM constraint raises the thigh effective mass from
+19.01 kg to 46.84 kg (about 2.46 times). Because the constraint is active for
+only one of the two directions, the surface in (c) is not centrally symmetric.
+
 ## System architecture
 
 <p align="center">
