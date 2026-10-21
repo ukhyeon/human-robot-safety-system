@@ -9,24 +9,74 @@ is maintained in two focused repositories so that the perception and robot
 control pipelines can be developed independently while sharing a common ROS 2
 interface.
 
+<p align="center">
+  <img src="docs/images/demo_online_speed_scaling.gif" width="640" alt="Online speed scaling of Indy7 during a head approach">
+</p>
+<p align="center">
+  Online run on an Indy7. The speed scale drops as the robot approaches the
+  worker's head and recovers as it moves away. Red, yellow, and blue markers
+  indicate the top-three collision-risk body parts.
+</p>
+
+> [!NOTE]
+> **Paper (manuscript to be submitted to IJCAS):** H. Kim, J. Lee, J. Choi,
+> H. Shin, and S. Rhim, "Personalized Directional Human Effective Mass
+> Estimation for Online Collision-Force Assessment and Speed Scaling of
+> Collaborative Robots." [PDF](docs/paper/ijcas_manuscript.pdf)
+
 ## System architecture
 
-```text
-Camera input
-    │
-    ▼
-Human sensing and 3D pose estimation
-    │
-    ▼
-Human dynamics and directional effective mass ─┐
-                                                ├──► Collision-risk assessment
-Indy7 state, dynamics, and effective mass ──────┘              │
-                                                               ▼
-                                                     Speed-scale command
-                                                               │
-                                                               ▼
-                                                            Indy7
-```
+<p align="center">
+  <img src="docs/images/system_architecture.png" width="760" alt="ROS 2 system architecture">
+</p>
+
+The RGB-D camera feeds SMPL-based human state estimation, and the human
+dynamics node computes the directional human effective mass. The robot
+dynamics node computes the link-wise Indy7 effective mass. The collision-force
+assessment node combines both into a reduced mass, collision force, and
+allowable speed, and the resulting speed ratio is sent to the Indy7 controller
+through IndyDCP. Human-side nodes are written in Python and robot-side nodes in
+C++.
+
+## Demonstrations
+
+| Real-time SMPL human-state estimation | Top-three collision-risk body parts |
+| :---: | :---: |
+| ![Real-time SMPL estimation](docs/images/demo_smpl_realtime.gif) | ![Risk body parts](docs/images/demo_risk_body_parts.gif) |
+| Shape is estimated with CLIFF and pose from RGB-D body tracking; the SMPL mesh is overlaid on the camera image. | Body segments are colored by collision-risk rank: red (1st), yellow (2nd), and blue (3rd). |
+
+## Results
+
+| Head, crouched posture | Upper arm, raised-arm posture |
+| :---: | :---: |
+| ![Head case](docs/images/controlled_case_head.jpg) | ![Upper-arm case](docs/images/controlled_case_upper_arm.jpg) |
+
+Arrows show the collision direction that maximizes the human effective mass.
+In these directions the directional effective mass (15.8 kg for the head,
+13.5 kg for the upper arm) exceeds the ISO/TS 15066 fixed mass (4.4 kg and
+3.0 kg), which raises the estimated collision force by 41.57% and 57.78% at the
+decision-boundary speed.
+
+<p align="center">
+  <img src="docs/images/online_response.png" width="560" alt="Online response during the head approach">
+</p>
+
+Online response for the most restrictive candidate pair during the head
+approach. (a) Directional human (red), robot (green), and fixed head (orange)
+effective masses, with the selected robot link (blue dashed, right axis).
+(b) Force estimated with the proposed (blue) and fixed (orange) human mass
+against the permissible force (green). (c) Raw (grey dashed) and applied (blue)
+speed scale, and the applied scale recomputed offline with the fixed mass
+(orange).
+
+- The estimated force differed from the fixed-mass baseline by 18.06% on
+  average over the head-approach interval.
+- The mean software-side assessment-to-command latency was 26.84 ms.
+- Jacobian-based velocity mapping and a BMI-based chest reference showed mean
+  relative errors of 3.31% and 5.59%.
+
+These force differences are model-output comparisons, not measured
+collision-force validation.
 
 ## Repositories
 
