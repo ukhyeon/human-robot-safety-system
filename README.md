@@ -85,7 +85,7 @@ In these directions the directional effective mass (15.8 kg for the head,
 decision-boundary speed.
 
 <p align="center">
-  <img src="docs/images/online_response.png" width="560" alt="Online response during the head approach">
+  <img src="docs/images/online_response.png" width="760" alt="Online response during the head approach">
 </p>
 
 Online response for the most restrictive candidate pair during the head
