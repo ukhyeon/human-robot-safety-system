@@ -24,10 +24,11 @@ interface.
 > Estimation for Online Collision-Force Assessment and Speed Scaling of
 > Collaborative Robots." [PDF](docs/paper/ijcas_manuscript.pdf)
 
-> **Follow-up work: [effmass-mpc](https://github.com/ukhyeon/effmass-mpc)**
-> The directional human effective mass from this system is carried into a
-> human-avoidance MPC (GPU MPPI, Isaac Sim, Franka FR3), where it sets the
-> shape of the avoidance zone around each body part.
+> **Follow-up work**
+> - [effmass-mpc](https://github.com/ukhyeon/effmass-mpc): the directional human effective mass from this system is carried into a
+>   human-avoidance MPC (GPU MPPI, Isaac Sim, Franka FR3), where it sets the shape of the avoidance zone around each body part.
+> - [effmass-mpc-franka](https://github.com/ukhyeon/effmass-mpc-franka): the same MPC on a real Franka FR3, running at 60 Hz with
+>   live RGB-D human sensing and a ros2_control bridge (Ruckig, 1 kHz).
 
 ## Directional human effective mass
 
